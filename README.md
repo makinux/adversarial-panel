@@ -132,6 +132,10 @@ curl -o ~/.claude/skills/adversarial-panel/SKILL.md https://raw.githubuserconten
 - **確信度の演技** — 反証条件なしの数値確信度は欠落として扱う
 - **多様性の錯覚** — 同一モデルのペルソナ違いは独立レビュアーではない。「Red Team」という役名では誤りは非相関にならない
 
+## ライセンス
+
+[MIT](LICENSE)
+
 ## クレジット
 
 概念・設計: [@wayama_ryousuke](https://x.com/wayama_ryousuke)(着想はGAN、設計の壁打ちは Claude Fable 5 と実施)
