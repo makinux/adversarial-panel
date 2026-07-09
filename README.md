@@ -17,24 +17,7 @@ Two design properties do the actual work — running "multiple models" as such i
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    F["<b>Facilitator</b><br/>Main session<br/><i>frames, validates, synthesizes</i>"]
-    A["<b>Panelist A</b><br/>Claude family (Agent tool)<br/><i>On-demand</i>"]
-    B["<b>Panelist B</b><br/>Different family (external CLI)<br/><i>On-demand</i>"]
-
-    F -->|"Round loop"| F
-    F ==>|"Brief"| A
-    F ==>|"Brief"| B
-    A -.->|"Answers & critiques"| F
-    B -.->|"Answers & critiques"| F
-    A <-->|"Cross-critique"| B
-
-    classDef facilitator fill:#FFFFFF,stroke:#2B2833,stroke-width:1.5px,color:#1E1C26
-    classDef panelist fill:#6C5B9E,stroke:#3E3462,stroke-width:2px,stroke-dasharray:7 5,color:#FFFFFF
-    class F facilitator
-    class A,B panelist
-```
+![Architecture: a facilitator distributes briefs to heterogeneous panelists, who cross-critique each other and return answers and critiques](assets/architecture.png)
 
 The facilitator (the main session) distributes a self-contained brief; panelists attack each other's answers (cross-critique) and return answers and critiques to the facilitator. Panelists are recruited in **descending order of heterogeneity**:
 
@@ -46,24 +29,7 @@ Default: **2 panelists × 3 rounds**. Cost grows as panelists × rounds.
 
 ## Protocol
 
-```mermaid
-flowchart LR
-    R0["<b>ROUND 0</b><br/>Framing<br/><i>triage & brief</i>"]
-    R1["<b>ROUND 1</b><br/>Independent answers<br/><i>blind, parallel</i>"]
-    R2["<b>ROUND 2</b><br/>Cross-critique<br/><i>refute by reproduction</i>"]
-    R3["<b>ROUND 3</b><br/>Final positions<br/><i>concede, defend, calibrate</i>"]
-    SYN["<b>SYNTHESIS</b><br/>Synthesis<br/><i>agreements, disagreements, conclusion</i>"]
-
-    R0 --> R1
-    R1 -->|"validation gate"| R2
-    R2 --> R3
-    R3 --> SYN
-
-    classDef facilitator fill:#FFFFFF,stroke:#2B2833,stroke-width:1.5px,color:#1E1C26
-    classDef panelist fill:#6C5B9E,stroke:#3E3462,stroke-width:2px,stroke-dasharray:6 4,color:#FFFFFF
-    class R0,SYN facilitator
-    class R1,R2,R3 panelist
-```
+![Protocol: Round 0 framing, Round 1 independent answers through a validation gate, Round 2 cross-critique, Round 3 final positions, then synthesis](assets/protocol.png)
 
 White = facilitator's job, purple = panelists' job.
 
